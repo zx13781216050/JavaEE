@@ -1,0 +1,33 @@
+<view>
+
+  <view class="header" wx:for="{{movie_list}}">
+    <view class="title">{{item.movie_name}}</view>
+    <view class="divline"></view>
+    <view class="seatimage" >
+      <image src="/images/seat.png" style="width:50rpx;height:50rpx"></image><text>已选</text>
+      <image src="/images/seat1.png" style="width:50rpx;height:50rpx"></image><text>可选</text>
+      <image src="/images/seat2.png" style="width:50rpx;height:50rpx"></image><text>已售</text>
+    </view>
+    <view class="divline"></view>
+   
+    <view class="yinmu"><text>银幕</text></view>
+    <view class="block" style="height:60px"></view>
+     
+    <view wx:for="{{seat_list}}"  class="seat" wx:for-index="index">
+      <block wx:for="{{item.list}}" wx:for-item="seat" >
+   
+        <block>
+          <image wx:if="{{seat.seat_status == 1}}" catchtap='close_tap' src='/images/seat1.png' style="width:50rpx;height:50rpx" data-Id="{{seat.seat_id}}" data-row="{{item.row}}"></image>
+          <image wx:elif="{{seat.seat_status == 2}}" catchtap='close_tap' src='/images/seat2.png' style="width:50rpx;height:50rpx" data-Id="{{seat.seat_id}}" data-row="{{item.row}}"></image>
+          <image wx:else catchtap='close_tap' src='/images/seat.png' style="width:50rpx;height:50rpx" data-Id="{{seat.seat_id}}" data-row="{{item.row}}"></image>
+        </block>
+
+
+      </block>
+    </view> 
+    <view class="divline"></view>
+    <view class="money"><text>共计：{{order_money}}元</text></view>
+    <view class="button"><van-button round type="info" size="large" color="#FF7F24" bindtap="buy">确认购买</van-button></view>
+    <view></view>
+  </view>
+</view>

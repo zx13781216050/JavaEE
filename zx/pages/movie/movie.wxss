@@ -1,0 +1,43 @@
+/* pages/movie/movie.wxss */
+.image{
+  width: 8rem;
+  height: 11rem;
+  margin: 2rem;
+  border-radius: 5%;
+  overflow:hidden;
+}
+.movie_name{
+  position: absolute;
+  margin-top: -13rem;
+  margin-left: 11rem;
+}
+.type{
+  font-weight:100;
+  font-size:0.7pc;
+  position: absolute;
+  margin-top: -11rem;
+  margin-left: 11rem;
+}
+.score{
+  position: absolute;
+  margin-top: -9.5rem;
+  margin-left: 11rem;
+  font-weight:100;
+  font-size:0.7pc;
+}
+.num{
+  font-size: 2pc;
+  color: gold;
+}
+.goodbutton {
+  
+  margin-top: -4.5rem;
+  margin-left: 11rem;
+  
+}
+.plot{
+  margin:2.5rem;
+  font-size: 0.8pc;
+}
+ 
+

@@ -1,0 +1,50 @@
+<!--pages/index/index.wxml-->
+<view>
+  <view class="contain">
+    <view class="header">
+      <view class="search">
+      <view class="df search_arr">
+        <icon class="searchcion" size='20' type='search'></icon>
+        <input class="" disabled placeholder="找电影" value="{{searchValue}}"/>
+      </view>
+    </view>
+    <view class='sousuo'>搜索</view>
+    </view>
+    <view class="divLine"></view>
+    <view class="swiper" >
+    <swiper indicator-dots="false"
+ autoplay="true" interval="3000" duration="1800 " bindchange="">
+ <block wx:for="{{imgUrls}}">
+  <swiper-item>
+   <image src="{{item}}" class="slide-image"/>
+  </swiper-item>
+ </block>
+</swiper>
+</view>
+<view class="divLine"></view>
+<wxs src="../../utils/filer.wxs" module="filer" />
+<view class="movielsit" wx:for='{{list}}'>
+
+<van-card
+  tag="热映"
+  price="30"
+  
+  title="{{item.movie_name}}"
+  thumb="{{ item.main_photo }}"
+  thumb-mode="aspectFit"
+  thumb-link="../movie/movie"
+>
+  <view slot="desc"><text>导演：{{item.director}}\n主演：{{item.actor}}\n类型：{{item.type}}<!--{{filer.abbreviation(item.plot)}}--></text></view>
+  <view slot="footer">
+  
+    <van-button round type="info" size="small" color="#FF7F24" bindtap="detail_movie" 
+    id="{{item.movie_id}}">查看详情</van-button>
+    
+  </view>
+</van-card>
+  <view style="height:25rpx"></view>
+ 
+  
+</view>
+  </view>
+</view>

@@ -1,0 +1,8 @@
+<view>
+  <view class="cinema_list" wx:for='{{cinema_list}}'>
+    <view class="cinema_name"><text>{{item.cinema_name}}</text></view>
+    <view class="address_detail"><text>{{item.address_detail}}</text></view>
+    <view class="score"><text>{{item.score}}</text></view>
+    <view class="divLine"></view>
+  </view>
+</view>
