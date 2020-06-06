@@ -14,7 +14,7 @@ import java.util.List;
 public class C_Movie_Info {
     @Autowired
     private S_Movie_Info s_movie_info;
-
+//周祥是傻逼
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setAutoGrowNestedPaths(true);
