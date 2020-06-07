@@ -4,6 +4,9 @@ import com.emall_4_morning.entity.Order_Info;
 import com.emall_4_morning.mapper.Order_InfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,7 +14,17 @@ import java.util.List;
 public class S_Order_Info {
     @Autowired
     private Order_InfoMapper order_infoMapper;
-    public List<Order_Info> insertorderinfo(int order_id, int user_id, int cinema_id, int screeningroom_id, int movie_id, int order_status){
-        return order_infoMapper.insertorderinfo(order_id,user_id,cinema_id,screeningroom_id,movie_id,order_status);
+    public int updateseat(int order_id,int seat_id){
+        int flag = order_infoMapper.updateseat(order_id,seat_id);
+        return flag;
+    }
+    public int insertorderinfo(Order_Info order_info){
+        int flag = order_infoMapper.insertorderinfo(order_info);
+
+        return flag;
+    }
+    public int getorderid(){
+        int flag = order_infoMapper.getorderid();
+        return flag;
     }
 }

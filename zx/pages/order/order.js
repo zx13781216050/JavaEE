@@ -8,12 +8,13 @@ Page({
       flag:true,
       movie_list:[],
       seat_list:[],
-      buy_id:["","",""],
+      buy_id:[],
      isShow:false,
      index:0,
      flag:true,
      order_money:0,
-     order_id:0
+     //order_id:0,
+     use_id:1
   },  
   close_tap:function(e){ 
     var id = e.currentTarget.dataset.id;   
@@ -22,7 +23,7 @@ Page({
     var that = this;
     let rowId=e.currentTarget.dataset.row
     this.data.seat_list[rowId-1].list.forEach(element => {
-      if(element.seat_id==id && this.data.index<=2){
+      if(element.seat_id==id && this.data.index<=2 ){
         element.seat_status=0;
             
         var string = 'buy_id[' + this.data.index + ']'
@@ -56,11 +57,19 @@ Page({
     },
     buy:function(){
       let that=this;
+      let order_id = getApp().getorderid;
       let cinemaid=getApp().getcinemaid;
     let movieid=getApp().requestDetailid;
-    let screeningroomid=this.data.seat_list.screeningroom_id;
-    let orderid = this.data.order_id;
+    let useid = this.data.use_id;
+    let screeningroomid=this.data.seat_list[1].list[1].screeningroom_id;
+    //let orderid = this.data.order_id+1;
+    let ordermoney = this.data.order_money;
+    let buy_id1 = this.data.buy_id[0];
+    let buy_id2 = this.data.buy_id[1];
+    let buy_id3 = this.data.buy_id[2];   
+    //var seat_id = JSON.stringify(this.data.buy_id);
      console.log(this.data.buy_id)
+
         wx.showModal({  
             title: '提示',  
             content: '是否确认购买',  
@@ -72,29 +81,39 @@ Page({
                   icon: 'success',
                   duration: 2000,
                 })
-                that.setData({                  
-                  orderid: orderid + 1,                  
-                });
+                
+                
                 wx.request({
                   url: 'http://localhost:8080/insert_order',
                   method:'POST',
                   data:{
                     movie_id:movieid,
                     cinema_id:cinemaid,
+                    order_money:ordermoney,
                     screeningroom_id:screeningroomid,
-                    order_id:orderid,
-                    user_id:1,
+                    order_id:order_id,
+                    use_id:useid,
                     order_status:1,
                   },
                 })
+                wx.request({
+                  url: 'http://localhost:8080/update_seat',
+                  method:'GET',
+                  data:{
+                    order_id:order_id,
+                   buy_id1:buy_id1,
+                   buy_id2:buy_id2,
+                   buy_id3:buy_id3,
+                  },
+                })
+
+                
                 } else if (res.cancel) {  
                 console.log('用户点击取消')  
                 }  
             }  
         })
-        this.setData({
-          order_id:orderid
-        })  
+       
       
     },    
     
@@ -104,12 +123,9 @@ Page({
   onLoad: function (options) {
     var that=this;
   /**全局变量传cinemaid，movieid */ 
-  
- 
     var cinemaid=getApp().getcinemaid;
-    var movieid=getApp().requestDetailid;
-    console.log(movieid);
-    console.log(cinemaid);
+    var movieid=getApp().requestDetailid;    
+    
     wx.request({
       url: 'http://localhost:8080/get_detail_movie',
       method:'POST',
@@ -140,9 +156,7 @@ Page({
         var list1=[],list2=[],list3=[],list4=[],list5=[],list6=[];
         var i = -1,j = -1,a = -1,b = -1,c = -1,d = -1;
         for (var index = 0; index < res.data.length; ++index) {
-          console.log(index);
-          console.log(res.data[index].seat_row);
-          
+         
           if(res.data[index].seat_row==1){
             i=i+1;
             list1[i]=res.data[index];
@@ -205,6 +219,7 @@ Page({
         })
       }
     })
+    
  
   },
   
@@ -212,8 +227,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    //获得popup组件
-      this.popup = this.selectComponent("#popup");
+    
   },
   showPopup() {
     this.popup.showPopup();

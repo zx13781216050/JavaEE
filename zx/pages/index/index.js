@@ -13,10 +13,7 @@ Page({
       '/images/i1.jpg'
      ],
      list:[],
-     
-     
-
-
+     order_id:0
   },
 
   /**
@@ -24,7 +21,20 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    
+    wx.request({
+      url:'http://localhost:8080/get_order_id',
+      method:'GET',
+      success:function(res){
+        console.log(res.data);
+        var resData = res.data;
+        that.setData({
+          order_id:resData
+        })
+      }          
+    })
+    let order_id = this.data.order_id;
+    var app=getApp();
+    app.getorderid=order_id;
     wx.request({
       url: 'http://localhost:8080/get_movie_list',
       method:'POST',
