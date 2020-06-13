@@ -39,5 +39,25 @@
   margin:2.5rem;
   font-size: 0.8pc;
 }
+.addcomment{
+  margin:15px;
+  height: 60px;
+  border: 1rpx dashed #a7a8a8;
+  
+}
+.add{
+  display: flex;
+  margin-top: 6px;
+  margin-left: 70px;
+  font-size: large;
+  
+  align-content: center;
+}
+
+.commentarea{
+  margin:6px;
+  
+  background-color: coral;
+}
  
 

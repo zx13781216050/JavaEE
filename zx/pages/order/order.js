@@ -91,7 +91,7 @@ Page({
                     cinema_id:cinemaid,
                     order_money:ordermoney,
                     screeningroom_id:screeningroomid,
-                    order_id:order_id,
+                    order_id:order_id+1,
                     use_id:useid,
                     order_status:1,
                   },
@@ -100,11 +100,16 @@ Page({
                   url: 'http://localhost:8080/update_seat',
                   method:'GET',
                   data:{
-                    order_id:order_id,
+                    movie_id:movieid,
+                    cinema_id:cinemaid,
+                    order_id:order_id+1,
                    buy_id1:buy_id1,
                    buy_id2:buy_id2,
                    buy_id3:buy_id3,
                   },
+                })
+                wx.redirectTo({
+                  url: '../movie/movie',
                 })
 
                 
@@ -121,11 +126,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let order_id = getApp().getorderid;
+    console.log(order_id)
     var that=this;
   /**全局变量传cinemaid，movieid */ 
     var cinemaid=getApp().getcinemaid;
     var movieid=getApp().requestDetailid;    
-    
+    wx.request({
+      url:'http://localhost:8080/get_order_id',
+      method:'GET',
+      success:function(res){
+        console.log(res.data);
+        var resData = res.data;
+        
+        var app=getApp();
+        app.getorderid=resData;
+ 
+      }          
+    })
     wx.request({
       url: 'http://localhost:8080/get_detail_movie',
       method:'POST',

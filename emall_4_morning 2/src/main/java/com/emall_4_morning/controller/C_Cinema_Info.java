@@ -35,6 +35,7 @@ public class C_Cinema_Info {
         int movie_id = Integer.parseInt(request.getParameter("movie_id"));
         int screeningroom_id = s_cinema_info.getscreeningroomid(cinema_id,movie_id);
         String getseatinfo = s_cinema_info.getdataname(screeningroom_id);
+
         List<Seat_Info> seat_infoList = null;
         seat_infoList = s_cinema_info.getseatinfolist(getseatinfo);
         return seat_infoList;

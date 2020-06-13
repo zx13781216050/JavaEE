@@ -3,6 +3,7 @@ package com.emall_4_morning.controller;
 import com.emall_4_morning.entity.Movie_Info;
 import com.emall_4_morning.entity.Order_Info;
 import com.emall_4_morning.entity.Seat_Info;
+import com.emall_4_morning.service.S_Cinema_Info;
 import com.emall_4_morning.service.S_Order_Info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,20 +20,26 @@ import java.util.List;
 public class C_Order_Info {
     @Autowired
     private S_Order_Info s_order_info;
+    @Autowired
+    private S_Cinema_Info s_cinema_info;
     @RequestMapping(value="update_seat",method = RequestMethod.GET)
     @ResponseBody
     public void updateseat(HttpServletRequest request){
+        int cinema_id = Integer.parseInt(request.getParameter("cinema_id"));
+        int movie_id = Integer.parseInt(request.getParameter("movie_id"));
+        int screeningroom_id = s_cinema_info.getscreeningroomid(cinema_id,movie_id);
+        String getdataname = s_cinema_info.getdataname(screeningroom_id);
         int order_id = Integer.parseInt(request.getParameter("order_id"));
        //String[] seat_id =  request.getParameterValues("buy_id");
         int seat_id1 = Integer.parseInt(request.getParameter("buy_id1"));
-        int flag1 = s_order_info.updateseat(order_id,seat_id1);
+        int flag1 = s_order_info.updateseat(getdataname,order_id,seat_id1);
         if(request.getParameter("buy_id3").length()<3) {
             int seat_id2 = Integer.parseInt(request.getParameter("buy_id2"));
-            int flag2 = s_order_info.updateseat(order_id,seat_id2);
+            int flag2 = s_order_info.updateseat(getdataname,order_id,seat_id2);
         }
         if(request.getParameter("buy_id3").length()<3) {
             int seat_id3 = Integer.parseInt(request.getParameter("buy_id3"));
-            int flag3 = s_order_info.updateseat(order_id,seat_id3);
+            int flag3 = s_order_info.updateseat(getdataname,order_id,seat_id3);
         }
 //
 //       for(int i=0;i<3;i++){

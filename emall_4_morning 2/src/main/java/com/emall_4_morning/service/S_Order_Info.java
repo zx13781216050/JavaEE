@@ -14,8 +14,8 @@ import java.util.List;
 public class S_Order_Info {
     @Autowired
     private Order_InfoMapper order_infoMapper;
-    public int updateseat(int order_id,int seat_id){
-        int flag = order_infoMapper.updateseat(order_id,seat_id);
+    public int updateseat(String data_name,int order_id,int seat_id){
+        int flag = order_infoMapper.updateseat(data_name,order_id,seat_id);
         return flag;
     }
     public int insertorderinfo(Order_Info order_info){

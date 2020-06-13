@@ -1,5 +1,6 @@
 package com.emall_4_morning.controller;
 
+import com.emall_4_morning.entity.Movie_Comment;
 import com.emall_4_morning.entity.Movie_Info;
 import com.emall_4_morning.service.S_Movie_Info;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +41,13 @@ public class C_Movie_Info {
 
         return detail_movie;
     }
+    @RequestMapping(value = "get_movie_comment",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Movie_Comment> getmoviecomment(@RequestBody Movie_Comment movie_comment){
+        List<Movie_Comment> movie_comments = null;
+        movie_comments = s_movie_info.getmoviecomment(movie_comment.getMovie_id());
+        System.out.println(movie_comments);
+        return movie_comments;
+    }
+
 }

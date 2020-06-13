@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 @Repository
 public interface Order_InfoMapper {
-    @Update("update seat_info_1_1 set seat_status = 2, order_id = #{order_id} where seat_id=#{seat_id}")
-    int updateseat(int order_id,int seat_id);
+    @Update("update ${data_name} set seat_status = 2, order_id = #{order_id} where seat_id=#{seat_id}")
+    int updateseat(String data_name,int order_id,int seat_id);
 
     @Insert("insert into order_info (order_id, order_money, use_id, cinema_id, " +
             " screeningroom_id, movie_id, order_status) values(#{order_id},#{order_money},#{use_id}," +

@@ -6,8 +6,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[]
-
+    list:[],
+    isShow: false,
+    comment_list:[],
+    hiddenmodalput: true,
+    comment_content:''
+  },
+  modalinput: function () {
+    this.setData({
+      //注意到模态框的取消按钮也是绑定的这个函数，
+      //所以这里直接取反hiddenmodalput，也是没有毛病
+      hiddenmodalput: !this.data.hiddenmodalput
+    })
+  },
+  bindinput:function(e){
+    this.setData({
+      comment_content:e.detail.value
+    })
+    
+  },
+  confirm:function(e){
+    var app=getApp();
+    var movieid=app.getmovieid;
+    wx.request({
+      url: 'http://localhost:8080/insert_movie_comment',
+      method:'POST',
+      data:{
+        mocie_id:movieid,
+        user_id:1,
+        comment_content:this.data.comment_content
+      }
+    })
   },
   tobuy: function(e){
     var id=e.currentTarget.id;
@@ -18,6 +47,7 @@ Page({
       url: '../chioce_cinema/chioce_cinema',
     })
   },
+  
 
   /**
    * 生命周期函数--监听页面加载
@@ -44,14 +74,30 @@ Page({
         })
       }
     })
-    
+    wx.request({
+      url: 'http://localhost:8080/get_movie_comment',
+      method:'POST',
+      data:{
+        movie_id:movieid
+      },
+      header: {
+        'content-type': 'application/json',
+      },
+      success: function (res){
+        console.log(res.data);
+        var resData = res.data;
+        that.setData({
+          comment_list:resData
+        })
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+   
   },
 
   /**

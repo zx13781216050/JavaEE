@@ -1,0 +1,11 @@
+var abbreviation = function (plot) {
+  
+  if (plot.length > 25) {
+    return plot.slice(0, 25) + '...'
+  } else {
+    return plot
+  }
+}
+module.exports = {
+  abbreviation: abbreviation,
+}

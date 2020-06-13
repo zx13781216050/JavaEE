@@ -1,0 +1,24 @@
+/* pages/chioce_cinema/chioce_cinema.wxss *//* pages/cinema/cinema.wxss */
+.cinema_name{
+  margin:10rpx;
+  margin-top: 15rpx;
+}
+.address_detail{
+  font-weight:100;
+  font-size:0.7pc;
+  margin:10rpx;
+}
+.divLine{
+  background: #E0E3DA;
+  width: 100%;
+  height: 3rpx;
+  margin:10rpx;
+ }
+ .score{
+   font-size: 1.5pc;
+   font-weight: 400;
+   color: gold;
+   position: absolute;
+   margin-top: -2.5rem;
+   margin-left: 20rem;
+ }
