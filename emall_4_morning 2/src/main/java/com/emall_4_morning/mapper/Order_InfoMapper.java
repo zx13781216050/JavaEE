@@ -21,4 +21,7 @@ public interface Order_InfoMapper {
     int insertorderinfo(Order_Info order_info);
     @Select("SELECT MAX(order_id) FROM order_info;")
     int getorderid();
+    @Select("select screeningroom_id,cinema_id from order_info where user_id = 1")
+    int getscid();
+
 }

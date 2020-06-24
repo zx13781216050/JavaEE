@@ -5,8 +5,8 @@
     "pages/my/my",
     "pages/movie/movie",
     "pages/order/order",
-    "pages/chioce_cinema/chioce_cinema"
-    
+    "pages/chioce_cinema/chioce_cinema",
+    "pages/my_movie/my_movie"
   ],
   "window": {
     "backgroundTextStyle": "light",

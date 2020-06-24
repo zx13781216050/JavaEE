@@ -15,6 +15,18 @@ public class C_Moive_Comment_Info {
     @RequestMapping(value = "insert_movie_comment",method = RequestMethod.POST)
     @ResponseBody
     public void insertmoviecomment(@RequestBody Movie_Comment movie_comment){
-        int flag = s_movie_comment_info.insertmoviecomment(movie_comment);
+        int movie_comment_id = movie_comment.getMovie_comment_id();
+        String comment_content = movie_comment.getComment_content();
+        int user_id = movie_comment.getUser_id();
+        String comment_time = movie_comment.getComment_time();
+        int movie_id = movie_comment.getMovie_id();
+        String user_nickname = s_movie_comment_info.getusernickname(user_id);
+        int flag = s_movie_comment_info.insertmoviecomment(movie_comment_id,comment_content,user_id,comment_time,user_nickname,movie_id);
+
+    }
+    @RequestMapping(value = "get_movie_comment_id",method = RequestMethod.POST)
+    @ResponseBody
+    public void getmoviecommentid(){
+        int flag = s_movie_comment_info.getmoviecommentid();
     }
 }

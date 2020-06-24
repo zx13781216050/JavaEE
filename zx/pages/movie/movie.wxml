@@ -9,20 +9,20 @@
       <view class="plot {{isShow ? 'on' : ''}}" ><text>{{item.plot}}</text></view>
     </view>
     <view class="commentarea"><text>评论区</text></view>
-      <view class="addcomment" bindtap="modalinput">
-        <view class="add">
-          <image src="/images/add.png" style="height:20px;width:20px"></image>
-          <text>说下你的看法吧</text>
-        </view>
+    <view class="addcomment" bindtap="modalinput">
+      <view class="add">
+        <image src="/images/add.png" style="height:20px;width:20px"></image>
+        <text>说下你的看法吧</text>
       </view>
-      <modal hidden="{{hiddenmodalput}}" title="请输入你的看法" confirm-text="提交" cancel-text="取消" bindcancel="modalinput" bindconfirm="confirm">
-     <!-- 这里可以自由选择你的输入框类型<input type='text' placeholder="请输入内容" auto-focus/> -->
-     <textarea bindinput="bindinput" placeholder="请输入内容"></textarea>
-   </modal>
+    </view>
+    <modal hidden="{{hiddenmodalput}}" title="请输入你的看法" confirm-text="提交" cancel-text="取消" bindcancel="modalinput" bindconfirm="confirm">
+      <!-- 这里可以自由选择你的输入框类型<input type='text' placeholder="请输入内容" auto-focus/> -->
+      <textarea bindinput="bindinput" placeholder="请输入内容"></textarea>
+    </modal>
 
     <view class="comment" wx:for="{{comment_list}}" wx:for-key="item">
       <van-cell-group>
-        <van-cell title="{{item.user_nickname}}" value="评分：{{item.score}}" label="{{item.comment_content}}" border="{{ false }}" />
+        <van-cell title="{{item.user_nickname}}" value="{{item.comment_time}}" label="{{item.comment_content}}" border="{{ false }}" />
       </van-cell-group>
     </view>
   </view>

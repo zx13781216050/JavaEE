@@ -1,5 +1,5 @@
 // pages/movie/movie.js
-
+var util = require('../../utils/util.js')
 Page({
 
   /**
@@ -10,7 +10,8 @@ Page({
     isShow: false,
     comment_list:[],
     hiddenmodalput: true,
-    comment_content:''
+    comment_content:'',
+    comment_id:0,
   },
   modalinput: function () {
     this.setData({
@@ -20,23 +21,35 @@ Page({
     })
   },
   bindinput:function(e){
+    
     this.setData({
+     
       comment_content:e.detail.value
     })
     
   },
   confirm:function(e){
-    var app=getApp();
-    var movieid=app.getmovieid;
+    var that=this;
+    var dayTime = util.formatTime(new Date());
+    var movieid=getApp().requestDetailid;
     wx.request({
       url: 'http://localhost:8080/insert_movie_comment',
       method:'POST',
       data:{
-        mocie_id:movieid,
+        movie_id:movieid,
         user_id:1,
-        comment_content:this.data.comment_content
+        comment_content:this.data.comment_content,
+        movie_comment_id:this.comment_id+1,
+        comment_time:dayTime,
+      },
+      success:function(){
+        that.onLoad()
+        that.setData({
+          hiddenmodalput: !that.data.hiddenmodalput
+        })
       }
     })
+  
   },
   tobuy: function(e){
     var id=e.currentTarget.id;
@@ -57,6 +70,18 @@ Page({
     var movieid=getApp().requestDetailid;
     console.log(movieid);
 
+    wx.request({
+      url: 'http://localhost:8080/get_movie_comment_id',
+      method:'POST',
+      data:{},
+      success:function(res){
+        console.log(res.data);
+        var resData = res.data;
+        that.setData({
+          comment_id:resData
+        })
+      }
+    })
     wx.request({
       url: 'http://localhost:8080/get_detail_movie',
       method:'POST',
